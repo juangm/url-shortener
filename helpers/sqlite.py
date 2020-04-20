@@ -107,9 +107,9 @@ class Sqlite3Helper:
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         sql_replace_url = """UPDATE urls
                              SET count = 0 ,
-                               original = '{}'
+                               original = '{}',
                                last_visit = '{}'
-                             order BY last_visit ASC LIMIT 1;"""
+                             ORDER BY last_visit ASC LIMIT 1;"""
         self._create_connection()
         cursor = self._execute_sql(sql_replace_url.format(original_url, now))
         self.conn.commit()

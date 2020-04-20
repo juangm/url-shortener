@@ -28,13 +28,15 @@ class UrlShortenerInteractive(Cmd):
             url = self.sql_helper.search_url(input_url)
             if url != []:
                 print("URL is already in DB!!")
-                print("short url associated => {}".format(url[2]))
+                print(
+                    "The short URL is => https://www.applau.se/{}".format(url[1]))
                 return False
             index = self.sql_helper.count_urls_stored()
             if index == self.url_helper.max_combinations:
                 # Update last visit url
                 url = self.sql_helper.update_latest_visit(input_url)
-                print("The short URL is => {}".format(url[2]))
+                print(
+                    "The short URL is => https://www.applau.se/{}".format(url[1]))
             else:
                 short = self.url_helper.generate_short_url(index)
                 self.sql_helper.input_new_url(input_url, short[1])

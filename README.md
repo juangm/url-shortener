@@ -12,11 +12,11 @@ Small python project for URL shortener
 
 ## Specifications
 
-- [ ] Shorten a URL:
+- [x] Shorten a URL:
 
   - [x] Input: A regular URL (not from applau.se domain)
   - [x] Output: A shortened URL (use only ten digits, 26 lowercase characters, 26 uppercase characters) of extra length 2 from a given link example: applau.se/5s)
-  - [ ] Handle the case that the 2-character length is running out of choices by retiring the shortened URL that has not been called for the longest time
+  - [x] Handle the case that the 2-character length is running out of choices by retiring the shortened URL that has not been called for the longest time
 
 - [x] Retrieve a URL:
 
