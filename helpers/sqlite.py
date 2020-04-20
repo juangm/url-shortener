@@ -51,17 +51,16 @@ class Sqlite3Helper:
         sql_search_url = "SELECT * FROM urls WHERE original = '{}';"
         self._create_connection()
         cursor = self._execute_sql(sql_search_url.format(url_to_search))
-        # originals urls should be unique in DB
-        if len(cursor.fetchall()) > 1:
+        url_row = cursor.fetchall()
+        if len(url_row) > 1:
             raise AssertionError("Not possible to have same url in DB")
-        return list(cursor.fetchall()[0])
+        return list(url_row[0]) if len(url_row) == 1 else []
 
     def search_short_path(self, short_path):
         """ Search for an original url in the DB """
         sql_search_url = "SELECT * FROM urls WHERE short = '{}';"
         self._create_connection()
         cursor = self._execute_sql(sql_search_url.format(short_path))
-        # originals urls should be unique in DB
         url_row = cursor.fetchall()
         if len(url_row) > 1:
             raise AssertionError("Not possible to have same url in DB")
@@ -103,3 +102,16 @@ class Sqlite3Helper:
         data = [list(x) for x in all_values] if all_values != [] else [
             ["", "", "", "", ""]]
         termtables.print(data, header=headers, alignment='c')
+
+    def update_latest_visit(self, original_url):
+        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        sql_replace_url = """UPDATE urls
+                             SET count = 0 ,
+                               original = '{}'
+                               last_visit = '{}'
+                             order BY last_visit ASC LIMIT 1;"""
+        self._create_connection()
+        cursor = self._execute_sql(sql_replace_url.format(original_url, now))
+        self.conn.commit()
+        # Check update was performed
+        return self.search_url(original_url)

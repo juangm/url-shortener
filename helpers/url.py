@@ -12,6 +12,7 @@ class UrlHelper:
         # Load the possible combinations
         with open('combinations/encoding.json') as f:
             self.combinations = json.load(f)
+        self.max_combinations = len(self.combinations)
 
     def check_domain(self, input_url):
         """Method to detect if url needs to be shorted or return original"""
