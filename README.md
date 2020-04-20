@@ -27,6 +27,22 @@ Small python project for URL shortener
 
   - [x] Show all stored shortened URLs (including shortened URL, original URL, call count and latest call time) and sort by call count
 
+## Run
+
+To run the url-shortener locally, you just need to install the requirements and execute:
+
+```sh
+python3 shortener.py
+```
+
+The program has the following options implemented:
+
+- url: provide a url to short or unshort
+- setup_db: create table in DB and erase previous data if table existed before (only admin)
+- show_db: show all the data in the urls table (only admin)
+- help: help menu
+- exit: exit the program
+
 ## Future improvements
 
 - [ ] Implement login system with password for the admin service
