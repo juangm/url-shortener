@@ -8,6 +8,7 @@ Small python project for URL shortener
 
 - [Python 3.7.6](https://www.python.org/downloads/release/python-376/)
 - [Sqlite](https://www.sqlite.org/index.html)
+- Install python packages dependencies `pip3 install -r requirements.txt`
 
 ## Specifications
 
