@@ -7,10 +7,10 @@ import validators
 class UrlHelper:
 
     def __init__(self):
-        self.base_domain = 'www.applau.se'
+        self.base_domain = "www.applau.se"
         self.combinations = None
         # Load the possible combinations
-        with open('combinations/encoding.json') as f:
+        with open("combinations/encoding.json") as f:
             self.combinations = json.load(f)
         self.max_combinations = len(self.combinations)
 
@@ -25,9 +25,9 @@ class UrlHelper:
                     print("x Invalid URL to get original URL")
                     print("--- for example: https://www.applau.se/gf")
                 else:
-                    return 'to_unshort'
+                    return "to_unshort"
             else:
-                return 'to_short'
+                return "to_short"
         else:
             print("x Invalid URL please introduce a valid URL")
             print("--- for example: https://www.example.com/path")
@@ -35,4 +35,4 @@ class UrlHelper:
 
     def generate_short_url(self, position):
         """Generate shorten url path based in index"""
-        return ['https://{}'.format(self.base_domain), ''.join(self.combinations[position])]
+        return ["https://{}".format(self.base_domain), "".join(self.combinations[position])]

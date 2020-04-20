@@ -101,7 +101,7 @@ class Sqlite3Helper:
         all_values = cursor.fetchall()
         data = [list(x) for x in all_values] if all_values != [] else [
             ["", "", "", "", ""]]
-        termtables.print(data, header=headers, alignment='c')
+        termtables.print(data, header=headers, alignment="c")
 
     def update_latest_visit(self, original_url):
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

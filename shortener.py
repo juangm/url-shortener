@@ -23,7 +23,7 @@ class UrlShortenerInteractive(Cmd):
         """ Introduce an URL for shorting or unshorting """
         input_url = input("Introduce the url to short or unshort => ")
         operation = self.url_helper.check_domain(input_url)
-        if operation == 'to_short':
+        if operation == "to_short":
             # Check if URL doesn't exist in DB
             url = self.sql_helper.search_url(input_url)
             if url != []:
