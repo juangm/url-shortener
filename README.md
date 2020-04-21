@@ -6,7 +6,7 @@ Small python project for URL shortener
 
 ## :warning: Security Warning
 
-- This program was created for education purposes.
+- This program was created for educational purposes.
 - This program is not protected against :syringe: `sql injection`
   - If the script is added to a web service, the service will filter the inputs to avoid this issue
 
