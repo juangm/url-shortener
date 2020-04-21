@@ -49,6 +49,11 @@ The program has the following options implemented:
 - help: help menu.
 - exit: exit the program.
 
+Generate combinations for possible short urls:
+
+- The combinations for the previous specs are already generated in `combinations/encoding.json` file
+- To regenerate the file just run `python3 combinations/generate_combinations.pyt`
+
 ## Future improvements
 
 - [ ] Implement login system with password for the admin service.

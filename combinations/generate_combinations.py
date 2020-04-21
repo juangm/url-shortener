@@ -9,5 +9,5 @@ charset = string.ascii_lowercase + string.digits + string.ascii_uppercase
 list_combinations = list(itertools.product(charset, repeat=2))
 
 # Write all the combination to a json file for later use it
-with open('./combinations/encoding.json', 'w', encoding='utf-8') as f:
+with open("./combinations/encoding.json", "w", encoding="utf-8") as f:
     json.dump(list_combinations, f, ensure_ascii=False, indent=2)

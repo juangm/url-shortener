@@ -41,7 +41,7 @@ class UrlShortenerInteractive(Cmd):
                 short = self.url_helper.generate_short_url(index)
                 self.sql_helper.input_new_url(input_url, short[1])
                 print("The short URL is => {}/{}".format(short[0], short[1]))
-        elif operation == 'to_unshort':
+        elif operation == "to_unshort":
             original_url = self.sql_helper.search_short_path(input_url[-2:])
             if original_url == []:
                 print("Short URL not found in DB!!")
@@ -52,28 +52,21 @@ class UrlShortenerInteractive(Cmd):
     def do_setup_db(self, inp):
         """ Create table in DB and erase all data if table exists
             Only for Admin users! """
-        if self.user == 'admin':
+        if self.user == "admin":
             print("Creating table in DB")
             self.sql_helper.setup_db()
         else:
-            print('Sorry this option is only for Admins')
+            print("Sorry this option is only for Admins")
 
     def do_show_db(self, inp):
         """ Display all the values in DB order by count
             Only for Admin users! """
-        if self.user == 'admin':
+        if self.user == "admin":
             self.sql_helper.admin_get_all_urls()
         else:
-            print('Sorry this option is only for Admins')
+            print("Sorry this option is only for Admins")
 
 
 if __name__ == "__main__":
-    sql_helper = Sqlite3Helper()
-
-    count = sql_helper.count_urls_stored()
-    print(count)
-
-    url_interact = UrlShortenerInteractive()
-    url_interact.cmdloop()
-
-    print("after")
+    # Run the main program in cmdloop
+    UrlShortenerInteractive().cmdloop()

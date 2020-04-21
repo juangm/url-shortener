@@ -19,9 +19,7 @@ class Sqlite3Helper:
             print(e)
 
     def _execute_sql(self, sql_statement):
-        """ execute sql statement in
-        :sql_statement sql statement to be executed
-        """
+        """ Execute sql statement in """
         try:
             c = self.conn.cursor()
             c.execute(sql_statement)
@@ -31,13 +29,13 @@ class Sqlite3Helper:
 
     def setup_db(self):
         """ Create a table and delete previous data if table was created """
-        sql_create_urls_table = """ CREATE TABLE IF NOT EXISTS urls (
-                                        id integer PRIMARY KEY,
-                                        short text NOT NULL,
-                                        original text NOT NULL,
-                                        count integer NOT NULL,
-                                        last_visit text NOT NULL
-                                    ); """
+        sql_create_urls_table = """CREATE TABLE IF NOT EXISTS urls (
+                                       id integer PRIMARY KEY,
+                                       short text NOT NULL,
+                                       original text NOT NULL,
+                                       count integer NOT NULL,
+                                       last_visit text NOT NULL
+                                    );"""
         self._create_connection()
         self._execute_sql(sql_create_urls_table)
         self.conn.commit()
@@ -57,7 +55,7 @@ class Sqlite3Helper:
         return list(url_row[0]) if len(url_row) == 1 else []
 
     def search_short_path(self, short_path):
-        """ Search for an original url in the DB """
+        """ Search for short path in the DB """
         sql_search_url = "SELECT * FROM urls WHERE short = '{}';"
         self._create_connection()
         cursor = self._execute_sql(sql_search_url.format(short_path))
@@ -67,12 +65,14 @@ class Sqlite3Helper:
         return list(url_row[0]) if len(url_row) == 1 else []
 
     def count_urls_stored(self):
+        """ Return total number of elements/urls stored in the table urls """
         sql_count_total = "SELECT COUNT(*) FROM urls;"
         self._create_connection()
         cursor = self._execute_sql(sql_count_total)
         return list(cursor.fetchone())[0]
 
     def update_short_url(self, short_url):
+        """ Update url information when requesting shorted url """
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         sql_update_count = """UPDATE urls
                               SET count = count + 1 ,
@@ -83,6 +83,7 @@ class Sqlite3Helper:
         self.conn.commit()
 
     def input_new_url(self, original_url, short_path):
+        """ Add new url to the DB """
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         sql_input_new = """INSERT INTO urls(short,original,count,last_visit)
                            VALUES('{}','{}',0, '{}');"""
@@ -93,17 +94,18 @@ class Sqlite3Helper:
         print("Added url {} to DB".format(original_url))
 
     def admin_get_all_urls(self):
+        """ Get all data from urls table and display ordered by count """
         sql_display_urls = "SELECT * FROM urls ORDER BY count DESC;"
         self._create_connection()
         cursor = self._execute_sql(sql_display_urls)
         headers = ["id", "short", "original", "count", "last_visit"]
         # Convert the row values into list
         all_values = cursor.fetchall()
-        data = [list(x) for x in all_values] if all_values != [] else [
-            ["", "", "", "", ""]]
+        data = [list(x) for x in all_values] if all_values != [] else [["", "", "", "", ""]]
         termtables.print(data, header=headers, alignment="c")
 
     def update_latest_visit(self, original_url):
+        """ When DB is full then overwrite row with oldest last_visit url"""
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         sql_replace_url = """UPDATE urls
                              SET count = 0 ,
