@@ -19,7 +19,6 @@ class TestUrlHelper:
     def test_check_not_valid_short_url(self, url_helper, not_short_urls, capsys):
         assert url_helper.check_domain(not_short_urls) == False
         captured = capsys.readouterr()
-        print(captured)
         assert captured.out == """x Invalid URL to get original URL\n--- for example: https://www.applau.se/gf\n"""
 
     def test_valid_url(self, url_helper):
