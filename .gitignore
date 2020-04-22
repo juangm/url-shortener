@@ -5,4 +5,7 @@ __pycache__/
 pip-log.txt
 
 # VSCode settings
-.VSCode
+.vscode
+
+# Pytest
+.pytest_cache

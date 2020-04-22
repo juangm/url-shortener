@@ -1,6 +1,7 @@
 from urllib.parse import urlparse
 
 import json
+import re
 import validators
 
 
@@ -20,10 +21,12 @@ class UrlHelper:
         if validators.url(input_url):
             url_parsed = urlparse(input_url)
             if self.base_domain in url_parsed.netloc:
-                # Check path doesn't contains more than 2 characters
-                if len(url_parsed.path) != 3:
+                # Check path doesn't contains more than 2 characters and according to specs
+                match = re.match(r"^/[a-zA-Z0-9]{2}", url_parsed.path)
+                if match is None or len(url_parsed.path) != 3:
                     print("x Invalid URL to get original URL")
                     print("--- for example: https://www.applau.se/gf")
+                    return False
                 else:
                     return "to_unshort"
             else:
@@ -35,4 +38,6 @@ class UrlHelper:
 
     def generate_short_url(self, position):
         """Generate shorten url path based in index"""
+        if type(position) is not int:
+            return False
         return ["https://{}".format(self.base_domain), "".join(self.combinations[position])]
