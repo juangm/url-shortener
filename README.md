@@ -54,6 +54,12 @@ Generate combinations for possible short urls:
 - The combinations for the previous specs are already generated in `combinations/encoding.json` file
 - To regenerate the file just run `python3 combinations/generate_combinations.pyt`
 
+Run the tests:
+
+```sh
+pytest
+```
+
 ## Future improvements
 
 - [ ] Implement login system with password for the admin service.
