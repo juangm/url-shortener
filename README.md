@@ -62,7 +62,10 @@ pytest
 
 ## Future improvements
 
-- [ ] Implement login system with password for the admin service.
 - [ ] Add tests for checking the specs are not being broken when implementing new features.
+  - [x] Tests for url helper class
+  - [ ] Tests for sqlite helper class
+  - [ ] Tests for simulating real user interaction (based in specs)
+- [ ] Implement login system with password for the admin service.
 - [ ] Create a CI to run the tests.
 - [ ] Implement small web application for the user interface.
