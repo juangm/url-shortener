@@ -8,7 +8,7 @@ Small python project for URL shortener
 
 - This program was created for educational purposes.
 - This program is not protected against :syringe: `sql injection`
-  - If the script is added to a web service, the service will filter the inputs to avoid this issue
+  - If the script is added to a web service, the service will sanitize the inputs to avoid related issues
 
 ## Requirements
 
